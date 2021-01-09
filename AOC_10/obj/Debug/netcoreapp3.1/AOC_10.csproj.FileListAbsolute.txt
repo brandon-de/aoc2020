@@ -1,0 +1,16 @@
+C:\Users\Brandon\Source\repos\AOC_2020\AOC_10\bin\Debug\netcoreapp3.1\AOC_10.exe
+C:\Users\Brandon\Source\repos\AOC_2020\AOC_10\bin\Debug\netcoreapp3.1\AOC_10.deps.json
+C:\Users\Brandon\Source\repos\AOC_2020\AOC_10\bin\Debug\netcoreapp3.1\AOC_10.runtimeconfig.json
+C:\Users\Brandon\Source\repos\AOC_2020\AOC_10\bin\Debug\netcoreapp3.1\AOC_10.runtimeconfig.dev.json
+C:\Users\Brandon\Source\repos\AOC_2020\AOC_10\bin\Debug\netcoreapp3.1\AOC_10.dll
+C:\Users\Brandon\Source\repos\AOC_2020\AOC_10\bin\Debug\netcoreapp3.1\AOC_10.pdb
+C:\Users\Brandon\Source\repos\AOC_2020\AOC_10\obj\Debug\netcoreapp3.1\AOC_10.csprojAssemblyReference.cache
+C:\Users\Brandon\Source\repos\AOC_2020\AOC_10\obj\Debug\netcoreapp3.1\AOC_10.Properties.Resources.resources
+C:\Users\Brandon\Source\repos\AOC_2020\AOC_10\obj\Debug\netcoreapp3.1\AOC_10.csproj.GenerateResource.cache
+C:\Users\Brandon\Source\repos\AOC_2020\AOC_10\obj\Debug\netcoreapp3.1\AOC_10.AssemblyInfoInputs.cache
+C:\Users\Brandon\Source\repos\AOC_2020\AOC_10\obj\Debug\netcoreapp3.1\AOC_10.AssemblyInfo.cs
+C:\Users\Brandon\Source\repos\AOC_2020\AOC_10\obj\Debug\netcoreapp3.1\AOC_10.csproj.CoreCompileInputs.cache
+C:\Users\Brandon\Source\repos\AOC_2020\AOC_10\obj\Debug\netcoreapp3.1\AOC_10.dll
+C:\Users\Brandon\Source\repos\AOC_2020\AOC_10\obj\Debug\netcoreapp3.1\AOC_10.pdb
+C:\Users\Brandon\Source\repos\AOC_2020\AOC_10\obj\Debug\netcoreapp3.1\AOC_10.genruntimeconfig.cache
+C:\Users\Brandon\Source\repos\AOC_2020\AOC_10\bin\Debug\netcoreapp3.1\AOC10.txt
