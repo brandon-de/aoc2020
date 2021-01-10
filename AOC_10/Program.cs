@@ -1,27 +1,25 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Data;
-using System.Linq;
-using System.Net;
-
 namespace AOC_10
 {
-    class Program
+    using System;
+    using System.Collections.Generic;
+    using System.IO;
+    using System.Linq;
+
+    internal class Program
     {
         private static int[] _nums;
 
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            string[] lines = System.IO.File.ReadAllLines(@"AOC10.txt");
+            var lines = File.ReadAllLines(@"AOC10.txt");
             _nums = new int[lines.Length + 1];
 
             for (var i = 0; i < lines.Length; i++)
             {
-                _nums[i+ 1] = Convert.ToInt32(lines[i]);
+                _nums[i + 1] = Convert.ToInt32(lines[i]);
             }
 
             Array.Sort(_nums);
-
 
             Console.WriteLine($"Part 1 answer: {Part1()}");
             Console.WriteLine($"Part 2 answer: {Part2(_nums.ToList(), new Dictionary<string, int>())}");
@@ -39,7 +37,7 @@ namespace AOC_10
                     continue;
                 }
 
-                int diff = _nums[i + 1] - _nums[i];
+                var diff = _nums[i + 1] - _nums[i];
 
                 switch (diff)
                 {
@@ -69,7 +67,7 @@ namespace AOC_10
             {
                 if (nums[i + 1] - nums[i - 1] <= 3)
                 {
-                    var splits = new List<int>() {nums[i - 1]}.Concat(nums.Skip(i + 1)).ToList();
+                    var splits = new List<int> {nums[i - 1]}.Concat(nums.Skip(i + 1)).ToList();
                     result += Part2(splits, cache);
                 }
             }
