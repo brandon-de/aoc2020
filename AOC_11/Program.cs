@@ -16,55 +16,116 @@ namespace AOC_11
             var lines = File.ReadAllLines(@"AOC11.txt").ToList();
 
             var seats = lines.Select(line => line.ToCharArray().ToList()).ToList();
+
+            Console.WriteLine($"Part 1 answer: {Part1(seats)}");
+
+            Console.ReadLine();
         }
 
-        private static void Part1(List<List<char>> seatRows)
+        private static int Part1(List<List<char>> oldSeatRows)
         {
-            for (var rowIndex = 0; rowIndex < seatRows.Count; rowIndex++)
+            // initial copy
+            var newSeatRows = oldSeatRows.Select(x => x.ToList()).ToList();
+
+            var isMatch = false;
+            while (!isMatch)
             {
-                for (var seatIndex = 0; seatIndex < seatRows[rowIndex].Count; seatIndex++)
+                for (var rowIndex = 0; rowIndex < oldSeatRows.Count; rowIndex++)
                 {
-                    char seat = seatRows[rowIndex][seatIndex];
-
-                    if (seat is _floor)
+                    for (var seatIndex = 0; seatIndex < oldSeatRows[rowIndex].Count; seatIndex++)
                     {
-                        continue;
-                    }
+                        char seat = oldSeatRows[rowIndex][seatIndex];
 
-                    Action work = () =>
-                    {
-                        int adjacentOccupiedSeats = 0;
-                        int adjacentEmptySeats = 0;
-                        for (var adjacentRowIndex = rowIndex - 1; adjacentRowIndex <= rowIndex + 1; adjacentRowIndex++)
+                        if (seat is _floor)
                         {
-                            for (var adjacentSeatIndex = seatIndex - 1;
-                                adjacentSeatIndex <= seatIndex + 1;
-                                adjacentSeatIndex++)
-                            {
-                                // out of bounds, assume empty
-                                if (adjacentRowIndex > seatRows.Count - 1 || adjacentRowIndex < 0 ||
-                                    adjacentSeatIndex < 0 || adjacentSeatIndex > seatIndex - 1)
-                                {
-                                    adjacentEmptySeats++;
-                                    continue;
-                                }
+                            continue;
+                        }
 
-                                switch (seatRows[adjacentRowIndex][adjacentSeatIndex])
+                        FindAdjacentSeats();
+
+                        void FindAdjacentSeats()
+                        {
+                            var adjacentOccupiedSeats = 0;
+                            var adjacentEmptySeats = 0;
+                            for (var adjacentRowIndex = rowIndex - 1; adjacentRowIndex <= rowIndex + 1; adjacentRowIndex++)
+                            {
+                                for (var adjacentSeatIndex = seatIndex - 1; adjacentSeatIndex <= seatIndex + 1; adjacentSeatIndex++)
                                 {
-                                    case _occupiedSeat:
-                                        adjacentOccupiedSeats++;
-                                        break;
-                                    case _emptySeat:
+                                    // current seat skip
+                                    if (adjacentSeatIndex == seatIndex && adjacentRowIndex == rowIndex)
+                                    {
+                                        continue;
+                                    }
+
+                                    // out of bounds, assume empty
+                                    if (adjacentRowIndex > oldSeatRows.Count - 1 || adjacentRowIndex < 0 ||
+                                        adjacentSeatIndex > oldSeatRows[adjacentRowIndex].Count - 1 ||
+                                        adjacentSeatIndex < 0 || adjacentSeatIndex > seatIndex + 1)
+                                    {
                                         adjacentEmptySeats++;
-                                        break;
-                                    default:
-                                        break;
+                                    }
+                                    else
+                                    {
+                                        switch (oldSeatRows[adjacentRowIndex][adjacentSeatIndex])
+                                        {
+                                            case _occupiedSeat:
+                                                adjacentOccupiedSeats++;
+                                                break;
+                                            case _emptySeat:
+                                                adjacentEmptySeats++;
+                                                break;
+                                            case _floor:
+                                                adjacentEmptySeats++;
+                                                break;
+                                            default:
+                                                break;
+                                        }
+                                    }
+
+                                    switch (seat)
+                                    {
+                                        case _occupiedSeat when adjacentOccupiedSeats == 4:
+                                            newSeatRows[rowIndex][seatIndex] = _emptySeat;
+                                            return;
+                                        case _emptySeat when adjacentEmptySeats == 8:
+                                            newSeatRows[rowIndex][seatIndex] = _occupiedSeat;
+                                            return;
+                                        default:
+                                            break;
+                                    }
                                 }
                             }
                         }
                     }
                 }
+
+                if (CompareSeatArrangements())
+                {
+                    isMatch = true;
+                }
+                else
+                {
+                    oldSeatRows = newSeatRows.Select(x => x.ToList()).ToList();
+                }
+
+                bool CompareSeatArrangements()
+                {
+                    for (var i = 0; i < oldSeatRows.Count; i++)
+                    {
+                        for (var j = 0; j < oldSeatRows[i].Count; j++)
+                        {
+                            if (oldSeatRows[i][j] != newSeatRows[i][j])
+                            {
+                                return false;
+                            }
+                        }
+                    }
+
+                    return true;
+                }
             }
+
+            return newSeatRows.SelectMany(newSeatRow => newSeatRow).Count(c => c is _occupiedSeat);
         }
     }
 }
